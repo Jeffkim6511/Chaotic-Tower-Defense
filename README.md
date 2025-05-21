@@ -1,16 +1,83 @@
-<TODO: Jeff Kim>: <TODO: 70668132>
+﻿# 🕹️ Tower Defense Game — Assignment 3: Closing the Game Loop
 
-Comments to TA about your implementation (optional):
-- Examples: known bugs or incomplete implementation
-For procedurally generated path, I implemented biased DFS. I first generate a path going from the start to the exit, then I add the tiles in based on
-previous coordinates and the next coordinates. To generate the path, I look at all the directions I could travel and if there is no issue, I put that direction
-into a list with a weight. If the path is going towards the exit, I give the direction extra weight. I then randomly choose a direction to travel with 
-emphasis on the weight and repeat. To make the path look more natural, I always go two tiles up, down, left, or right. This makes the path look much more natural
-when I is generated. 
+This is my interpretation of a tower defense game built using C++, OpenGL, and FreeType. This version adds enhanced gameplay functionality including rotating towers, procedurally generated maps, game over screens, and in-game font rendering.
 
-- To test if map is loaded/ has a valid path, I utilized level 6, which has a straight path from start to finish with one pathway removed. Additionally, I utilized 
-level 9 to ensure a non-saved level would count as an invalid level.
+---
 
-- for points, I decided to use a more structured approach for the points. Invaders with the lowest amount of HP give the least amount of points but give at least 2
-The second most hp invaders give a range between 4-7, and the enemies with the most hp give 6-9 points. I thought this was more fair because the tougher enemies
-are difficult to beat compared to the fast low hp ones.
+## 🎮 Features Overview
+
+### ✅ FreeType Font Integration
+- Integrated FreeType fonts into the game using the provided `SimpleGL` code.
+- Successfully merged `font-init` and `renderText` functions into the rendering pipeline.
+- Fonts are used to display game information on the intro screen and during gameplay.
+- Font resources (`.ttf` files) are stored in the `data/fonts/` folder.
+
+### 🧾 Intro Screen
+- Displays the game title, author name, and a dynamic menu.
+- Menu options include:
+  - Game name
+  - Selected game level (updates with number keys 0–9)
+  - `SPACE` to start the selected level
+  - `G` to generate a random valid level
+  - `R` to restart the current level (only works during gameplay)
+  - `ESC` to exit the game or return to the intro screen
+
+### 🧾 Game Over Screens
+- Victory screen appears when all invaders are destroyed.
+- Defeat screen appears when any invader reaches the exit.
+- Both screens fade in and display respective messages.
+- Pressing `ESC` returns the player to the intro screen.
+
+### 🗺️ Procedural Map Generation
+- Pressing `G` on the intro screen generates a new, unique map.
+- Each map includes a valid path between start and exit tiles.
+- Implemented map validation to ensure only valid levels can be played.
+- **Map Generation Algorithm**: Utilized randomized depth-first search (DFS) to carve a valid path through a grid. Surrounding tiles were selectively randomized to ensure path integrity and tower placement flexibility.
+
+### 🏆 Game Score Display
+- Displays score in the top-left corner using FreeType fonts.
+- Score updates in real-time as invaders are destroyed.
+
+### 🛡️ Tower Placement
+- Players can place towers using the **left mouse button**.
+- Towers can be removed with the **right mouse button**.
+- Towers cannot be placed on path tiles or the top row.
+
+### 🎯 Rotating Towers
+- Towers rotate smoothly to aim at the closest invader within a 5-tile radius.
+- Towers only fire when aligned and cooldowns are complete.
+- Partial marks awarded if rotation is instant — full rotation was implemented.
+
+### ❌ Invalid Level Handling
+- Invalid level files (levels 0–9) show an error message on the intro screen if no valid path exists.
+- Procedurally generated levels are always validated before starting.
+
+### 👾 Invader Spawning Mechanic
+- Spawns `10 × (current level + 1)` invaders.
+- Three types of invaders with distinct health and speed.
+- "Unspawned: XXX" counter shown at the top of the screen.
+- Spawn behavior adapted from A1/A2 with randomized stats and visual variation.
+
+### 💰 Invader Points System
+- Each invader is assigned a points value (1–5) on spawn.
+- Points are displayed above each invader's head using FreeType.
+- When destroyed, points float upward and are added to the player’s score.
+
+### 💥 Animations
+- Integrated animated explosion effects triggered when invaders are destroyed by towers.
+- Added Invader walking animations.
+
+---
+
+## 🛠️ Development Notes
+
+- Managed shader state to allow clean FreeType rendering alongside game assets.
+- Used OpenGL for rendering and SDL for input and window management.
+
+---
+
+## 📝 License
+
+Based on UBC CPSC 427 assignment structure with heavy modification to rendering, logic flow, and UI.
+Educational use only. All assets used belong to their respective creators and are included for academic purposes.
+
