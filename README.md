@@ -1,6 +1,27 @@
-﻿# 🕹️ Tower Defense Game — Assignment 3: Closing the Game Loop
+﻿# 🕹️ Chaotic Tower Defense
 
 This is my interpretation of a tower defense game built using C++, OpenGL, and FreeType. This version adds enhanced gameplay functionality including rotating towers, procedurally generated maps, game over screens, and in-game font rendering.
+
+---
+
+## 🧱 How to Install & Run the Game
+
+1. **Download and Extract**  
+   - Download the project `.zip` file  
+   - Extract it to your desired folder
+
+2. **Open in Your IDE**  
+   - Launch your preferred C++-compatible editor (e.g., Visual Studio, CLion, or VS Code)  
+   - Open the project folder
+
+3. **Build with CMake**  
+   - Make sure CMake is installed  
+   - Configure and generate build files using CMake  
+   - Build the project
+
+4. **Run the Game**  
+   - Launch the executable from your build directory  
+   - Start playing!
 
 ---
 
